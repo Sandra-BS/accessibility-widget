@@ -1,0 +1,309 @@
+/* Launcher Button */
+#accessibility-launcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Accessibility Panel */
+#accessibility-panel {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  width: 220px;
+}
+
+#accessibility-panel h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+/* Toggle larger text */
+.large-text * {
+  font-size: 1.25em !important;
+}
+
+/* High contrast colors */
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast a {
+  color: #0ff !important;
+}
+
+/* Dyslexia-friendly font (fallback to Comic Sans if OpenDyslexic not available) */
+.dyslexia-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+#accessibility-widget {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 15px;
+  z-index: 9999;
+  width: 200px;
+}
+
+#accessibility-widget button {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Seizure Safe Mode - disables animation and transitions */
+body.seizure-safe * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Vision Impaired Mode */
+body.vision-impaired {
+  font-size: 1.3em; /* Content scaling */
+  font-family: Arial, Helvetica, sans-serif !important; /* Readable font */
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.vision-impaired a {
+  color: #00ffff !important;
+}
+
+body.vision-impaired * {
+  background-color: transparent !important;
+  border-color: #fff !important;
+}
+
+/* ADHD Friendly Mode */
+body.adhd-friendly {
+  animation: none !important;
+  transition: none !important;
+  filter: brightness(90%);
+}
+
+/* ADHD Spotlight Overlay */
+#adhd-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  backdrop-filter: blur(4px) brightness(60%);
+  background: radial-gradient(
+    circle at var(--spotlight-x) var(--spotlight-y),
+    transparent 80px,
+    rgba(0, 0, 0, 0.5) 160px
+  );
+  transition: background 0.1s;
+}
+
+.keyboard-navigation *:focus {
+  outline: 3px solid #00f !important;
+  outline-offset: 2px;
+}
+
+/* Cognitive Disability Profile */
+body.cognitive-friendly * {
+  animation: none !important;
+  transition: none !important;
+}
+
+body.cognitive-friendly p,
+body.cognitive-friendly li {
+  line-height: 1.8 !important;
+  font-size: 18px !important;
+  letter-spacing: 0.5px !important;
+}
+
+body.cognitive-friendly h1,
+body.cognitive-friendly h2,
+body.cognitive-friendly h3 {
+  margin-top: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+body.cognitive-friendly .cta,
+body.cognitive-friendly button,
+body.cognitive-friendly a.button {
+  outline: 3px solid #0077ff;
+  background-color: #e0f2ff !important;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+body.cognitive-friendly img.decorative,
+body.cognitive-friendly .non-essential {
+  display: none !important;
+}
+
+body.cognitive-friendly section,
+body.cognitive-friendly article,
+body.cognitive-friendly div {
+  padding: 20px !important;
+  margin: 10px 0 !important;
+}
+
+.keyboard-navigation *:focus {
+  outline: 3px solid #ff9800;
+  outline-offset: 2px;
+  transition: outline 0.2s ease-in-out;
+}
+
+.read-aloud-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+#read-aloud-btn,
+#stop-reading-btn {
+  padding: 8px 14px;
+  background-color: #2a68ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#read-aloud-btn:hover,
+#stop-reading-btn:hover {
+  background-color: #1e4ad9;
+}
+.scale-content {
+  transition: transform 0.3s ease-in-out;
+}
+.readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.highlight-titles h1,
+.highlight-titles h2,
+.highlight-titles h3,
+.highlight-titles h4,
+.highlight-titles h5,
+.highlight-titles h6 {
+  background-color: #fff9c4;
+  padding: 0.2em;
+  border-radius: 0.2em;
+}
+
+.highlight-links a {
+  background-color: #e1f5fe;
+  text-decoration: underline !important;
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+}
+.align-left * {
+  text-align: left !important;
+}
+
+.line-height-increase * {
+  line-height: 1.8 !important;
+}
+
+.letter-spacing-increase * {
+  letter-spacing: 0.08em !important;
+}
+/* General background dim when spotlight mode is active */
+.focus-spotlight-mode *:not(:focus):not(.widget):not(.widget *) {
+  filter: blur(1.5px) brightness(0.7);
+  transition: filter 0.2s ease;
+}
+
+/* Add glow or highlight to focused elements */
+.focus-spotlight-mode *:focus {
+  outline: 3px solid #ffd54f !important;
+  box-shadow: 0 0 10px 3px rgba(255, 213, 79, 0.9);
+  position: relative;
+  z-index: 1000;
+}
+/* Kill transitions and animations site-wide */
+.reduce-motion-mode * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+body {
+  transition: text-align 0.3s ease;
+}
+.dark-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.dark-contrast a {
+  color: #0ff !important;
+}
+
+.light-contrast {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.light-contrast a {
+  color: #00f !important;
+}
+.high-saturation {
+  filter: saturate(2) !important; /* Doubles saturation */
+}
+.adjust-text-color {
+  color: #111 !important;
+  background-color: #fefefe !important;
+}
+.monochrome-mode {
+  filter: grayscale(100%) !important;
+}
+
+#text-magnifier {
+  position: fixed;
+  z-index: 9999;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  font-size: 24px;
+  padding: 8px 12px;
+  pointer-events: none;
+  max-width: 300px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+/* Hide images */
+.hide-images img {
+  display: none !important;
+}
+
+/* Stop animations */
+.stop-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+/* Big Black Cursor */
+.big-black-cursor * {
+  cursor: url('https://cdn.jsdelivr.net/gh/encharm/Font-Awesome-SVG-PNG@master/black/png/32/mouse-pointer.png'), auto !important;
+}
+
+/* Big White Cursor */
+.big-white-cursor * {
+  cursor: url('https://cdn.jsdelivr.net/gh/encharm/Font-Awesome-SVG-PNG@master/white/png/32/mouse-pointer.png'), auto !important;
+}
