@@ -1,3 +1,5 @@
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("Accessibility Widget loaded");
 // --- Create toggle button ---
 const toggleButton = document.createElement('button');
 toggleButton.innerText = '♿';
@@ -711,3 +713,4 @@ document.head.appendChild(style);
 
   // Add other settings here...
 })();
+});
