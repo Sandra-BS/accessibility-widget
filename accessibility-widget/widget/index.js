@@ -1,8 +1,26 @@
-// --- Create toggle button ---
-const toggleButton = document.createElement('button');
-toggleButton.innerText = '♿';
-toggleButton.setAttribute('id', 'accessibility-toggle');
-document.body.appendChild(toggleButton);
+// Check if domain is registered before showing widget
+async function checkDomainRegistration() {
+  try {
+    const currentDomain = window.location.hostname;
+    const response = await fetch(`https://your-render-app.onrender.com/api/check/${currentDomain}`);
+    const data = await response.json();
+    
+    if (data.registered) {
+      initializeWidget();
+    } else {
+      console.log('Domain not registered for accessibility widget');
+    }
+  } catch (error) {
+    console.error('Error checking domain registration:', error);
+  }
+}
+
+function initializeWidget() {
+  // --- Create toggle button ---
+  const toggleButton = document.createElement('button');
+  toggleButton.innerText = '♿';
+  toggleButton.setAttribute('id', 'accessibility-toggle');
+  document.body.appendChild(toggleButton);
 
 // --- Create accessibility panel ---
 const panel = document.createElement('div');
@@ -59,34 +77,50 @@ toggleButton.addEventListener('click', () => {
 
 // --- Feature 1: Increase text size ---
 document.getElementById('text-size-btn').addEventListener('click', () => {
-  document.body.classList.toggle('large-text');
+  const button = document.getElementById('text-size-btn');
+  const isActive = document.body.classList.toggle('large-text');
+  button.classList.toggle('active', isActive);
 });
 
 // --- Feature 2: High contrast mode ---
 document.getElementById('contrast-btn').addEventListener('click', () => {
-  document.body.classList.toggle('high-contrast');
+  const button = document.getElementById('contrast-btn');
+  const isActive = document.body.classList.toggle('high-contrast');
+  button.classList.toggle('active', isActive);
 });
 
 // --- Feature 3: Dyslexia-friendly font ---
 document.getElementById('dyslexia-btn').addEventListener('click', () => {
-  document.body.classList.toggle('dyslexia-font');
+  const button = document.getElementById('dyslexia-btn');
+  const isActive = document.body.classList.toggle('dyslexia-font');
+  button.classList.toggle('active', isActive);
 });
 
 document.getElementById('reset-btn').addEventListener('click', () => {
   document.body.classList.remove('large-text', 'high-contrast', 'dyslexia-font');
+  // Remove active class from all buttons
+  document.querySelectorAll('#accessibility-panel button').forEach(btn => {
+    btn.classList.remove('active');
+  });
 });
 
 // Seizure Safe Mode toggle functionality
 document.getElementById('seizure-safe-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('seizure-safe');
+  const button = document.getElementById('seizure-safe-toggle');
+  const isActive = document.body.classList.toggle('seizure-safe');
+  button.classList.toggle('active', isActive);
 });
 
 document.getElementById('vision-impaired-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('vision-impaired');
+  const button = document.getElementById('vision-impaired-toggle');
+  const isActive = document.body.classList.toggle('vision-impaired');
+  button.classList.toggle('active', isActive);
 });
 
 document.getElementById('adhd-friendly-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('adhd-friendly');
+  const button = document.getElementById('adhd-friendly-toggle');
+  const isActive = document.body.classList.toggle('adhd-friendly');
+  button.classList.toggle('active', isActive);
 });
 
 // Reading Guide (only active in ADHD mode)
@@ -113,28 +147,32 @@ document.addEventListener('mousemove', (e) => {
 
 const toggleCognitive = document.getElementById('toggle-cognitive');
 toggleCognitive.addEventListener('click', () => {
-  document.body.classList.toggle('cognitive-friendly');
+  const button = document.getElementById('toggle-cognitive');
+  const isActive = document.body.classList.toggle('cognitive-friendly');
+  button.classList.toggle('active', isActive);
 });
 
 document.getElementById("toggle-keyboard").addEventListener("click", () => {
-  document.body.classList.toggle("keyboard-navigation");
-
-  const isActive = document.body.classList.contains("keyboard-navigation");
+  const button = document.getElementById("toggle-keyboard");
+  const isActive = document.body.classList.toggle("keyboard-navigation");
+  button.classList.toggle('active', isActive);
   localStorage.setItem("keyboard-navigation", isActive ? "true" : "false");
 });
 if (localStorage.getItem("keyboard-navigation") === "true") {
   document.body.classList.add("keyboard-navigation");
+  document.getElementById("toggle-keyboard").classList.add('active');
 }
 
 document.getElementById("toggle-screenreader").addEventListener("click", () => {
-  document.body.classList.toggle("screenreader-profile");
-
-  const isActive = document.body.classList.contains("screenreader-profile");
+  const button = document.getElementById("toggle-screenreader");
+  const isActive = document.body.classList.toggle("screenreader-profile");
+  button.classList.toggle('active', isActive);
   localStorage.setItem("screenreader-profile", isActive ? "true" : "false");
 });
 
 if (localStorage.getItem("screenreader-profile") === "true") {
   document.body.classList.add("screenreader-profile");
+  document.getElementById("toggle-screenreader").classList.add('active');
 }
 
 
@@ -180,7 +218,9 @@ stopReadingBtn.addEventListener("click", () => {
 });
 
 document.getElementById("scale-content-toggle").addEventListener("click", () => {
+  const button = document.getElementById("scale-content-toggle");
   const scaleApplied = document.body.classList.toggle("scale-content");
+  button.classList.toggle('active', scaleApplied);
 
   if (scaleApplied) {
     document.body.style.transform = "scale(1.2)";
@@ -190,124 +230,138 @@ document.getElementById("scale-content-toggle").addEventListener("click", () => 
     document.body.style.transformOrigin = "top left";
   }
 });
+
 // Readable Font
 document.getElementById("readable-font-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("readable-font");
+  const button = document.getElementById("readable-font-toggle");
+  const isActive = document.body.classList.toggle("readable-font");
+  button.classList.toggle('active', isActive);
 });
 
 // Highlight Titles
 document.getElementById("highlight-titles-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("highlight-titles");
+  const button = document.getElementById("highlight-titles-toggle");
+  const isActive = document.body.classList.toggle("highlight-titles");
+  button.classList.toggle('active', isActive);
 });
 
 // Highlight Links
 document.getElementById("highlight-links-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("highlight-links");
+  const button = document.getElementById("highlight-links-toggle");
+  const isActive = document.body.classList.toggle("highlight-links");
+  button.classList.toggle('active', isActive);
 });
+
+// Text Alignment - these are mutually exclusive
 document.getElementById("text-align-left-toggle").addEventListener("click", () => {
+  const button = document.getElementById("text-align-left-toggle");
   document.body.style.textAlign = "left";
+  // Remove active from other alignment buttons
+  document.querySelectorAll('[id*="text-align"]').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
 });
 
 document.getElementById("text-align-center-toggle").addEventListener("click", () => {
+  const button = document.getElementById("text-align-center-toggle");
   document.body.style.textAlign = "center";
+  // Remove active from other alignment buttons
+  document.querySelectorAll('[id*="text-align"]').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
 });
 
 document.getElementById("text-align-right-toggle").addEventListener("click", () => {
+  const button = document.getElementById("text-align-right-toggle");
   document.body.style.textAlign = "right";
+  // Remove active from other alignment buttons
+  document.querySelectorAll('[id*="text-align"]').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
 });
-
 
 // Line Height
 document.getElementById("line-height-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("line-height-increase");
+  const button = document.getElementById("line-height-toggle");
+  const isActive = document.body.classList.toggle("line-height-increase");
+  button.classList.toggle('active', isActive);
 });
 
 // Letter Spacing
 document.getElementById("letter-spacing-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("letter-spacing-increase");
+  const button = document.getElementById("letter-spacing-toggle");
+  const isActive = document.body.classList.toggle("letter-spacing-increase");
+  button.classList.toggle('active', isActive);
 });
+
 document.getElementById("focus-spotlight-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("focus-spotlight-mode");
+  const button = document.getElementById("focus-spotlight-toggle");
+  const isActive = document.body.classList.toggle("focus-spotlight-mode");
+  button.classList.toggle('active', isActive);
 });
+
 document.getElementById("reduce-motion-toggle").addEventListener("click", () => {
-  document.body.classList.toggle("reduce-motion-mode");
+  const button = document.getElementById("reduce-motion-toggle");
+  const isActive = document.body.classList.toggle("reduce-motion-mode");
+  button.classList.toggle('active', isActive);
 });
-let isDarkContrast = false;
-
+// Contrast toggles - these are mutually exclusive
 document.getElementById("dark-contrast-toggle").addEventListener("click", () => {
-  if (isDarkContrast) {
-    document.body.classList.remove("dark-contrast");
-  } else {
-    document.body.classList.add("dark-contrast");
+  const button = document.getElementById("dark-contrast-toggle");
+  const isActive = document.body.classList.toggle("dark-contrast");
+  button.classList.toggle('active', isActive);
+  
+  // Remove other contrast modes
+  if (isActive) {
+    document.body.classList.remove("light-contrast", "high-contrast");
+    document.querySelectorAll('[id*="contrast-toggle"]').forEach(btn => {
+      if (btn !== button) btn.classList.remove('active');
+    });
   }
-  isDarkContrast = !isDarkContrast;
 });
-document.body.classList.remove("dark-contrast");
-isDarkContrast = false;
-
-let isLightContrast = false;
 
 document.getElementById("light-contrast-toggle").addEventListener("click", () => {
-  if (isLightContrast) {
-    document.body.classList.remove("light-contrast");
-  } else {
-    document.body.classList.add("light-contrast");
+  const button = document.getElementById("light-contrast-toggle");
+  const isActive = document.body.classList.toggle("light-contrast");
+  button.classList.toggle('active', isActive);
+  
+  // Remove other contrast modes
+  if (isActive) {
+    document.body.classList.remove("dark-contrast", "high-contrast");
+    document.querySelectorAll('[id*="contrast-toggle"]').forEach(btn => {
+      if (btn !== button) btn.classList.remove('active');
+    });
   }
-  isLightContrast = !isLightContrast;
 });
-document.body.classList.remove("light-contrast");
-isLightContrast = false;
-let isHighContrast = false;
 
 document.getElementById("high-contrast-toggle").addEventListener("click", () => {
-  if (isHighContrast) {
-    document.body.classList.remove("high-contrast");
-  } else {
-    document.body.classList.add("high-contrast");
+  const button = document.getElementById("high-contrast-toggle");
+  const isActive = document.body.classList.toggle("high-contrast");
+  button.classList.toggle('active', isActive);
+  
+  // Remove other contrast modes
+  if (isActive) {
+    document.body.classList.remove("dark-contrast", "light-contrast");
+    document.querySelectorAll('[id*="contrast-toggle"]').forEach(btn => {
+      if (btn !== button) btn.classList.remove('active');
+    });
   }
-  isHighContrast = !isHighContrast;
 });
-document.body.classList.remove("high-contrast");
-isHighContrast = false;
-let isHighSaturation = false;
 
 document.getElementById("high-saturation-toggle").addEventListener("click", () => {
-  if (isHighSaturation) {
-    document.body.classList.remove("high-saturation");
-  } else {
-    document.body.classList.add("high-saturation");
-  }
-  isHighSaturation = !isHighSaturation;
+  const button = document.getElementById("high-saturation-toggle");
+  const isActive = document.body.classList.toggle("high-saturation");
+  button.classList.toggle('active', isActive);
 });
-
-document.body.classList.remove("high-saturation");
-isHighSaturation = false;
-
-let isTextColorAdjusted = false;
 
 document.getElementById("text-color-toggle").addEventListener("click", () => {
-  if (isTextColorAdjusted) {
-    document.body.classList.remove("adjust-text-color");
-  } else {
-    document.body.classList.add("adjust-text-color");
-  }
-  isTextColorAdjusted = !isTextColorAdjusted;
+  const button = document.getElementById("text-color-toggle");
+  const isActive = document.body.classList.toggle("adjust-text-color");
+  button.classList.toggle('active', isActive);
 });
-document.body.classList.remove("adjust-text-color");
-isTextColorAdjusted = false;
-
-let isMonochrome = false;
 
 document.getElementById("monochrome-toggle").addEventListener("click", () => {
-  if (isMonochrome) {
-    document.body.classList.remove("monochrome-mode");
-  } else {
-    document.body.classList.add("monochrome-mode");
-  }
-  isMonochrome = !isMonochrome;
+  const button = document.getElementById("monochrome-toggle");
+  const isActive = document.body.classList.toggle("monochrome-mode");
+  button.classList.toggle('active', isActive);
 });
-document.body.classList.remove("monochrome-mode");
-isMonochrome = false;
 let isMagnifierActive = false;
 let magnifier;
 
@@ -372,3 +426,11 @@ document.getElementById("big-white-cursor-toggle").addEventListener("click", () 
   document.body.classList.toggle("big-white-cursor");
   document.body.classList.remove("big-black-cursor");
 });
+
+// Initialize widget when DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', checkDomainRegistration);
+} else {
+  checkDomainRegistration();
+}
+}
